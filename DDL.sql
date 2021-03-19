@@ -33,7 +33,7 @@ create table tab_cliente_pedido(
   foreign key tab_pedido_fk (ped_id) references ped_pedido (ped_id) on delete restrict on update cascade	
 );
 
-insert into cli_cliente(cli_nome, cli_email, cli_age)
+insert into cli_cliente(cli_nome, cli_email, cli_idade)
     values('Ariana', 'ariana@ariana.com', 37);
 insert into ped_pedido(ped_nome, ped_valor)
     values('pedido01', 200,00);
