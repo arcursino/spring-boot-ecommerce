@@ -36,5 +36,5 @@ create table tab_cliente_pedido(
 insert into cli_cliente(cli_nome, cli_email, cli_idade)
     values('Ariana', 'ariana@ariana.com', 37);
 insert into ped_pedido(ped_nome, ped_valor)
-    values('pedido01', 200,00);
+    values('pedido01', 200);
 insert into tab_cliente_pedido(1,1)
