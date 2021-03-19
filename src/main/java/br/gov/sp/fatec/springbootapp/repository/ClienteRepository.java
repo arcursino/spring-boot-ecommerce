@@ -5,16 +5,16 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import br.gov.sp.fatec.springbootapp.entity.Usuario;
+import br.gov.sp.fatec.springbootapp.entity.Cliente;
 
-public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
+public interface ClienteRepository extends JpaRepository<Cliente, Long>{
     /*public List<Usuario> findbyNomeContainsIgnoreCase(String nome);
 
     public Usuario findByNome(String nome);
 
     public Usuario findByNomeAndSenha(String nome, String senha);
 
-    public List<Usuario> findByAutorizacoesNome(String autorizacoes);*/
+    public List<Usuario> findByAutorizacoesNome(String autorizacoes);
 
 
     @Query("select u from Usuario u where u.nome = ?1")
@@ -24,5 +24,5 @@ public interface UsuarioRepository extends JpaRepository<Usuario, Long>{
     public Usuario buscaUsuarioPorNomeESenha(String nome, String senha);
     
     @Query("select u from Usuario u inner join u.autorizacoes a where a.nome = ?1")
-    public List<Usuario> buscaUsuarioPorNomeAutorizacao(String autorizacao );
+    public List<Usuario> buscaUsuarioPorNomeAutorizacao(String autorizacao );*/
 }
