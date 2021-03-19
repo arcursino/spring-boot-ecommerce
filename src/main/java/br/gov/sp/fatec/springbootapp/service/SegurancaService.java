@@ -1,9 +1,9 @@
 package br.gov.sp.fatec.springbootapp.service;
 
-import br.gov.sp.fatec.springbootapp.entity.Usuario;
+import br.gov.sp.fatec.springbootapp.entity.Cliente;
 
 public interface SegurancaService {
 
-    public Usuario criarUsuario(String nome, String senha, String autorizacao);
+    public Cliente criarCliente(String nome, String email, Integer idade, String pedido);
     
 }

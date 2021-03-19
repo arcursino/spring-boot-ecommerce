@@ -11,10 +11,10 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
 
-import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
-import br.gov.sp.fatec.springbootapp.entity.Usuario;
-import br.gov.sp.fatec.springbootapp.repository.AutorizacaoRepository;
-import br.gov.sp.fatec.springbootapp.repository.UsuarioRepository;
+import br.gov.sp.fatec.springbootapp.entity.Pedido;
+import br.gov.sp.fatec.springbootapp.entity.Cliente;
+import br.gov.sp.fatec.springbootapp.repository.PedidoRepository;
+import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 import br.gov.sp.fatec.springbootapp.service.SegurancaService;
 
 @SpringBootTest
@@ -23,10 +23,10 @@ import br.gov.sp.fatec.springbootapp.service.SegurancaService;
 class SpringBootAppApplicationTests {
 
     @Autowired
-    private UsuarioRepository usuarioRepo;
+    private ClienteRepository cliRepo;
 
     @Autowired
-    private AutorizacaoRepository autRepo;
+    private PedidoRepository pedRepo;
 
     @Autowired
     private SegurancaService segService;
@@ -38,89 +38,59 @@ class SpringBootAppApplicationTests {
     
     @Test
     void testaInsercao() {
-        Usuario usuario = new Usuario();
-        usuario.setNome("Ariana2");
-        usuario.setSenha("SenhaF0rte");
-        usuario.setAutorizacoes(new HashSet<Autorizacao>());
-        Autorizacao aut = new Autorizacao();
-        aut.setNome("ROLE_USUARIO");
-        autRepo.save(aut);
-        usuario.getAutorizacoes().add(aut);
-        usuarioRepo.save(usuario);  
-        assertNotNull(usuario.getId());     
+        Cliente cli = new Cliente();
+        cli.setNome("Ariana2");
+        cli.setEmail("ariana@ariana.com");
+        cli.setIdade(39);
+        cli.setPedidos(new HashSet<Pedido>());
+        Pedido ped = new Pedido();
+        ped.setNome("Pedido02");
+        pedRepo.save(ped);
+        cli.getPedidos().add(ped);
+        cliRepo.save(cli);  
+        assertNotNull(cli.getId());     
 
     }
 
     @Test
-    void testaAutorizacao() {
-        Usuario usuario = usuarioRepo.findById(1L).get();         
-        assertEquals("ROLE_ADMIN", usuario.getAutorizacoes().iterator().next().getNome());     
+    void testaPedido() {
+        Cliente cli = cliRepo.findById(1L).get();         
+        assertEquals("pedido01", cli.getPedidos().iterator().next().getNome());     
 
     }
 
     @Test
-    void testaUsuario() {
-        Autorizacao aut = autRepo.findById(1L).get();         
-        assertEquals("Ariana", aut.getUsuarios().iterator().next().getNome());     
+    void testaCliente() {
+        Pedido ped = pedRepo.findById(1L).get();         
+        assertEquals("Ariana", ped.getClientes().iterator().next().getNome());     
 
-    }
-
-    
-    /*@Test
-    void testaBuscaUsuarioNomeContains() {
-        List<Usuario> usuarios = usuarioRepo.findbyNomeContainsIgnoreCase("A");
-        assertFalse(usuarios.isEmpty());    
-
-    }
-
-    
-    @Test
-    void testaBuscaUsuarioNome() {
-        Usuario usuario = usuarioRepo.findByNome("Ariana");
-        assertNotNull(usuario);    
-
-    }
-
+    }    
 
     @Test
-    void testaBuscaUsuarioNomeSenha() {
-        Usuario usuario = usuarioRepo.findByNomeAndSenha("Ariana", "SenhaF0rte");
-        assertNotNull(usuario);    
-
-    }
-
-    void testaBuscaUsuarioNomeAutorizacao() {
-        List<Usuario> usuarios = usuarioRepo.findByAutorizacoesNome("ROLE_ADMIN");
-        assertFalse(usuarios.isEmpty());    
-
-    }
-    */
-
-    @Test
-    void testaBuscaUsuarioNomeSenhaQuery() {
-        Usuario usuario = usuarioRepo.buscaUsuarioPorNomeESenha("Ariana", "SenhaF0rte");
-        assertNotNull(usuario);    
+    void testaBuscaClienteNomeEmailQuery() {
+        Cliente cli = cliRepo.buscaClientePorNomeEmail("Ariana", "ariana@ariana.com");
+        assertNotNull(cli);    
 
     }
 
     @Test
-    void testaBuscaUsuarioNomeQuery() {
-        Usuario usuario = usuarioRepo.buscaUsuarioPorNome("Ariana");
-        assertNotNull(usuario);    
+    void testaBuscaClienteNomeQuery() {
+        Cliente cli = cliRepo.buscaClientePorNome("Ariana");
+        assertNotNull(cli);    
 
     }
 
     @Test
-    void testaBuscaUsuarioNomeAutorizacaoQuery() {
-        List<Usuario> usuarios = usuarioRepo.buscaUsuarioPorNomeAutorizacao("ROLE_ADMIN");
-        assertFalse(usuarios.isEmpty());    
+    void testaBuscaClienteNomePedidoQuery() {
+        List<Cliente> clientes = cliRepo.buscaClientePorNomePedido("pedido01");
+        assertFalse(clientes.isEmpty());    
 
     }
 
     @Test
-    void testaServicoCriaUsuario(){
-        Usuario usuario = segService.criarUsuario("normal", "senha123", "ROLE_USUARIO");
-        assertNotNull(usuario);
+    void testaServicoCriaCliente(){
+        Cliente cli = segService.criarCliente("Ariana", "ariana@ariana.com", 37, "pedido01");
+        assertNotNull(cli);
     }
 
 }

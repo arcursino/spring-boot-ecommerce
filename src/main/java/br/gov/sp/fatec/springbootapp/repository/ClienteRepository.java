@@ -7,22 +7,13 @@ import org.springframework.data.jpa.repository.Query;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
 
-public interface ClienteRepository extends JpaRepository<Cliente, Long>{
-    /*public List<Usuario> findbyNomeContainsIgnoreCase(String nome);
+public interface ClienteRepository extends JpaRepository<Cliente, Long>{   
+    @Query("select c from Cliente c where c.nome = ?1")
+    public Cliente buscaClientePorNome(String nome);
 
-    public Usuario findByNome(String nome);
-
-    public Usuario findByNomeAndSenha(String nome, String senha);
-
-    public List<Usuario> findByAutorizacoesNome(String autorizacoes);
-
-
-    @Query("select u from Usuario u where u.nome = ?1")
-    public Usuario buscaUsuarioPorNome(String nome);
-
-    @Query("select u from Usuario u where u.nome = ?1 and u.senha= ?2")
-    public Usuario buscaUsuarioPorNomeESenha(String nome, String senha);
+    @Query("select c from Cliente c where c.nome = ?1 and c.email= ?2")
+    public Cliente buscaClientePorNomeEmail(String nome, String email);
     
-    @Query("select u from Usuario u inner join u.autorizacoes a where a.nome = ?1")
-    public List<Usuario> buscaUsuarioPorNomeAutorizacao(String autorizacao );*/
+    @Query("select c from Cliente c inner join c.pedidos p where p.nome = ?1")
+    public List<Cliente> buscaClientePorNomePedido(String pedido);
 }
