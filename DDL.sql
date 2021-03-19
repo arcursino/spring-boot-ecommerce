@@ -1,36 +1,44 @@
-create schema anotacao;
+-- Cria o schema
+create schema ecomerce;
 
-use anotacao;
+use ecomerce;
 
 create user 'user'@'localhost' identified by 'pass123';
 
-grant select, insert, delete, update on anotacao.* to user@'localhost';
+grant select, insert, delete, update on ecomerce.* to user@'localhost';
 
-create table usr_usuario (
-  usr_id bigint unsigned not null auto_increment,
-  usr_nome varchar(20) not null,
-  usr_senha varchar(50) not null,
-  primary key (usr_id),
-  unique key uni_usuario_nome (usr_nome)
+-- Cria Tabela Cliente
+create table cli_cliente (
+  cli_id bigint unsigned not null auto_increment,
+  cli_nome varchar(20) not null,
+  cli_email varchar(50) not null,
+  cli_idade int not null,
+  
+  PRIMARY KEY (cli_id),
+  UNIQUE KEY uni_cli_email (cli_email),  
 );
 
-create table aut_autorizacao (
-  aut_id bigint unsigned not null auto_increment,
-  aut_nome varchar(20) not null,
-  primary key (aut_id),
-  unique key uni_aut_nome (aut_nome)
+-- Cria tabela Pedido
+create table ped_pedido (
+  ped_id bigint unsigned not null auto_increment,
+  ped_nome varchar(50) not null,
+  ped_valor float not null,
+  primary key (ped_id),  
+  unique key uni_ped_nome (ped_nome)
 );
 
-create table uau_usuario_autorizacao (
-  usr_id bigint unsigned not null,
-  aut_id bigint unsigned not null,
-  primary key (usr_id, aut_id),
-  foreign key aut_usuario_fk (usr_id) references usr_usuario (usr_id) on delete restrict on update cascade,
-  foreign key aut_autorizacao_fk (aut_id) references aut_autorizacao (aut_id) on delete restrict on update cascade
+
+-- Cria tabela Pedidos Tabelados de acordo com o Cliente
+create table tab_cliente_pedido(
+  cli_id bigint unsigned not null,
+  ped_id bigint unsigned not null,
+  primary key (cli_id, ped_id),
+  foreign key tab_cliente_fk (cli_id) references cli_cliente (cli_id) on delete restrict on update cascade,
+  foreign key tab_pedido_fk (ped_id) references ped_pedido (ped_id) on delete restrict on update cascade	
 );
 
-insert into usr_usuario(usr_nome, usr_senha)
-    values('Ariana', 'SenhaF0rte');
-insert into aut_autorizacao(aut_nome)
-    values('ROLE_ADMIN');
-insert into uau_usuario_autorizacao(1,1)
+insert into cli_cliente(cli_nome, cli_email, cli_age)
+    values('Ariana', 'ariana@ariana.com', 37);
+insert into ped_pedido(ped_nome, ped_valor)
+    values('pedido01', 200,00);
+insert into tab_cliente_pedido(1,1)
