@@ -12,19 +12,22 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "aut_autorizacao")
-public class Autorizacao {
+@Table(name = "ped_pedido")
+public class Pedido {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "aut_id")
+    @Column(name = "ped_id")
     private Long id;
 
-    @Column(name = "aut_nome")
+    @Column(name = "ped_nome")
     private String nome;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "autorizacoes")
-    private Set<Usuario> usuarios;
+    @Column(name = "ped_valor")
+    private Float valor;
+
+    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")
+    private Set<Cliente> clientes;
         
     public Long getId() {
         return this.id;
@@ -40,13 +43,21 @@ public class Autorizacao {
 
     public void setNome (String nome) {
         this.nome = nome;
-    }    
+    }   
     
-    public Set<Usuario> getUsuarios() {
-        return this.usuarios;
+    public Float getValor() {
+        return this.valor;
     }
 
-    public void setUsuarios (Set<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public void setValor (Float valor) {
+        this.valor = valor;
+    }    
+    
+    public Set<Cliente> getClientes() {
+        return this.clientes;
+    }
+
+    public void setClientes (Set<Cliente> clientes) {
+        this.clientes = clientes;
     }  
 }
