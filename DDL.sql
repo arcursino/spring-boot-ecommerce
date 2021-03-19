@@ -19,7 +19,7 @@ create table cli_cliente (
 create table ped_pedido (
   ped_id bigint unsigned not null auto_increment,
   ped_nome varchar(50) not null,
-  ped_valor float not null,
+  ped_valor double not null,
   primary key (ped_id),  
   unique key uni_ped_nome (ped_nome)
 );
@@ -36,5 +36,5 @@ create table tab_cliente_pedido(
 insert into cli_cliente(cli_nome, cli_email, cli_idade)
     values('Ariana', 'ariana@ariana.com', 37);
 insert into ped_pedido(ped_nome, ped_valor)
-    values('pedido01', 200);
+    values('pedido01', 200.00);
 insert into tab_cliente_pedido(1,1)

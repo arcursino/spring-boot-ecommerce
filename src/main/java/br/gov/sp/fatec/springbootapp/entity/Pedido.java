@@ -24,7 +24,7 @@ public class Pedido {
     private String nome;
 
     @Column(name = "ped_valor")
-    private Float valor;
+    private Double valor;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")
     private Set<Cliente> clientes;
@@ -45,11 +45,11 @@ public class Pedido {
         this.nome = nome;
     }   
     
-    public Float getValor() {
+    public Double getValor() {
         return this.valor;
     }
 
-    public void setValor (Float valor) {
+    public void setValor (Double valor) {
         this.valor = valor;
     }    
     
