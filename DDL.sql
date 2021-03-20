@@ -28,7 +28,7 @@ create table ped_pedido (
 create table tab_cliente_pedido(
   tab_cli_id bigint unsigned not null,
   tab_ped_id bigint unsigned not null,
-  primary key (cli_id, ped_id),
+  primary key (tab_cli_id, tab_ped_id),
   foreign key tab_cliente_fk (tab_cli_id) references cli_cliente (cli_id) on delete restrict on update cascade,
   foreign key tab_pedido_fk (tab_ped_id) references ped_pedido (ped_id) on delete restrict on update cascade	
 );
