@@ -35,6 +35,7 @@ class SpringBootAppApplicationTests {
 	@Test
 	void contextLoads() {
     }
+/*
    
     @Test
     void testaInsercao() {
@@ -51,7 +52,7 @@ class SpringBootAppApplicationTests {
         cliRepo.save(cli);  
         assertNotNull(cli.getId());     
 
-    }
+    }*/
 /*
     @Test
     void testaPedido() {
