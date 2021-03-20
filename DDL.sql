@@ -29,8 +29,8 @@ create table tab_cliente_pedido(
   tab_cli_id bigint unsigned not null,
   tab_ped_id bigint unsigned not null,
   primary key (cli_id, ped_id),
-  foreign key tab_cliente_fk (cli_id) references cli_cliente (cli_id) on delete restrict on update cascade,
-  foreign key tab_pedido_fk (ped_id) references ped_pedido (ped_id) on delete restrict on update cascade	
+  foreign key tab_cliente_fk (tab_cli_id) references cli_cliente (cli_id) on delete restrict on update cascade,
+  foreign key tab_pedido_fk (tab_ped_id) references ped_pedido (ped_id) on delete restrict on update cascade	
 );
 
 insert into cli_cliente(cli_nome, cli_email, cli_idade)
