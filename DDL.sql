@@ -19,7 +19,7 @@ create table cli_cliente (
 create table ped_pedido (
   ped_id bigint unsigned not null auto_increment,
   ped_nome varchar(50) not null,
-  ped_valor double not null,
+  ped_valor big decimal not null,
   primary key (ped_id),  
   unique key uni_ped_nome (ped_nome)
 );

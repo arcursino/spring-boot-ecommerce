@@ -24,7 +24,7 @@ public class Pedido {
     private String nome;
 
     @Column(name = "ped_valor")
-    private Double valor;
+    private BigDecimal valor;
 
     @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")
     private Set<Cliente> clientes;
@@ -45,11 +45,11 @@ public class Pedido {
         this.nome = nome;
     }   
     
-    public Double getValor() {
+    public BigDecimal getValor() {
         return this.valor;
     }
 
-    public void setValor (Double valor) {
+    public void setValor (BigDecimal valor) {
         this.valor = valor;
     }    
     
