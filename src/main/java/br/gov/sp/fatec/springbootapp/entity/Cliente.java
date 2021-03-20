@@ -34,8 +34,8 @@ public class Cliente {
     
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "tab_cliente_pedido",
-        joinColumns = { @JoinColumn(name= "cli_id")},
-        inverseJoinColumns = { @JoinColumn(name = "ped_id")}
+        joinColumns = { @JoinColumn(name= "tab_cli_id")},
+        inverseJoinColumns = { @JoinColumn(name = "tab_ped_id")}
         )
     private Set<Pedido> pedidos;
     

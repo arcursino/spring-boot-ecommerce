@@ -44,13 +44,9 @@ insert into ped_pedido(ped_nome, ped_valor)
     values('pedido01', 200);
 insert into ped_pedido(ped_nome, ped_valor)
     values('pedido02', 200);
-insert into ped_pedido(ped_nome, ped_valor)
-    values('pedido03', 100);
-
 
 insert into tab_cliente_pedido(tab_cli_id, tab_ped_id)
     values(1,1);
 insert into tab_cliente_pedido(tab_cli_id, tab_ped_id)
     values(2,2);
-insert into tab_cliente_pedido(tab_cli_id, tab_ped_id)
-    values(1,3);
+

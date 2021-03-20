@@ -15,7 +15,7 @@ import br.gov.sp.fatec.springbootapp.entity.Pedido;
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
 import br.gov.sp.fatec.springbootapp.repository.PedidoRepository;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
-import br.gov.sp.fatec.springbootapp.service.SegurancaService;
+import br.gov.sp.fatec.springbootapp.service.ClienteService;
 
 @SpringBootTest
 @Transactional
@@ -29,13 +29,13 @@ class SpringBootAppApplicationTests {
     private PedidoRepository pedRepo;
 
     @Autowired
-    private SegurancaService segService;
+    private ClienteService cliService;
 
 
 	@Test
 	void contextLoads() {
     }
-/*
+
    
     @Test
     void testaInsercao() {
@@ -46,29 +46,29 @@ class SpringBootAppApplicationTests {
         cli.setPedidos(new HashSet<Pedido>());
         Pedido ped = new Pedido();
         ped.setNome("pedido02");
-        ped.setValor(200.00);
+        ped.setValor(200);
         pedRepo.save(ped);
         cli.getPedidos().add(ped);
         cliRepo.save(cli);  
         assertNotNull(cli.getId());     
 
-    }*/
-/*
+    }
+
     @Test
     void testaPedido() {
         Cliente cli = cliRepo.findById(1L).get();         
         assertEquals("pedido01", cli.getPedidos().iterator().next().getNome());     
 
-    }*/
+    }
 
-    /*
+   
 
     @Test
     void testaCliente() {
         Pedido ped = pedRepo.findById(1L).get();         
         assertEquals("Ariana", ped.getClientes().iterator().next().getNome());     
 
-    }     */
+    }    
 
     @Test
     void testaBuscaClienteNomeEmailQuery() {
@@ -82,19 +82,19 @@ class SpringBootAppApplicationTests {
         Cliente cli = cliRepo.buscaClientePorNome("Ariana");
         assertNotNull(cli);    
 
-    }
-/*
+    } 
+
     @Test
     void testaBuscaClienteNomePedidoQuery() {
         List<Cliente> clientes = cliRepo.buscaClientePorNomePedido("pedido01");
         assertFalse(clientes.isEmpty());    
 
-    }*/
-/*
+    }
+
     @Test
     void testaServicoCriaCliente(){
-        Cliente cli = segService.criarCliente("Ariana", "ariana@ariana.com", 37, "pedido01");
+        Cliente cli = cliService.criarCliente("Ariana4", "ariana4@ariana.com", 37, "pedido04");
         assertNotNull(cli);
-    }*/
+    }    
 
 }
