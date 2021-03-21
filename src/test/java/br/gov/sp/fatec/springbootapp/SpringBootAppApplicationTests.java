@@ -40,12 +40,12 @@ class SpringBootAppApplicationTests {
     @Test
     void testaInsercao() {
         Cliente cli = new Cliente();
-        cli.setNome("Ariana2");
-        cli.setEmail("ariana2@ariana.com");
+        cli.setNome("Ariana3");
+        cli.setEmail("ariana3@ariana.com");
         cli.setIdade(39);
         cli.setPedidos(new HashSet<Pedido>());
         Pedido ped = new Pedido();
-        ped.setNome("pedido02");
+        ped.setNome("pedido03");
         ped.setValor(200);
         pedRepo.save(ped);
         cli.getPedidos().add(ped);
@@ -93,7 +93,7 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testaServicoCriaCliente(){
-        Cliente cli = cliService.criarCliente("Ariana4", "ariana4@ariana.com", 37, "pedido04");
+        Cliente cli = cliService.criarCliente("Ariana4", "ariana4@ariana.com", 37, "pedido04", 400);
         assertNotNull(cli);
     }    
 

@@ -23,7 +23,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Transactional
     @Override
-    public Cliente criarCliente(String nome, String email, Integer idade, String pedido) {
+    public Cliente criarCliente(String nome, String email, Integer idade, String pedido, Integer valor) {
         Pedido ped = pedRepo.buscaPedidoPorNome(pedido);
         if(ped == null) {
             ped = new Pedido();
