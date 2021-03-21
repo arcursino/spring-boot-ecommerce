@@ -12,8 +12,8 @@ import br.gov.sp.fatec.springbootapp.repository.PedidoRepository;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 
 
-@Service("segurancaService")
-public class SegurancaServiceImpl implements SegurancaService {
+@Service("ClienteService")
+public class ClienteServiceImpl implements ClienteService {
 
     @Autowired
     private PedidoRepository pedRepo;
@@ -28,7 +28,7 @@ public class SegurancaServiceImpl implements SegurancaService {
         if(ped == null) {
             ped = new Pedido();
             ped.setNome(pedido);
-            //ped.setValor(valor);
+            ped.setValor(valor);
             pedRepo.save(ped);
         }
         Cliente cli = new Cliente();
