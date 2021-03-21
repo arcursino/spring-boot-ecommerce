@@ -24,10 +24,11 @@ public class SegurancaServiceImpl implements SegurancaService {
     @Transactional
     @Override
     public Cliente criarCliente(String nome, String email, Integer idade, String pedido) {
-        Pedido ped = pedRepo.findByNome(pedido);
+        Pedido ped = pedRepo.buscaPedidoPorNome(pedido);
         if(ped == null) {
             ped = new Pedido();
             ped.setNome(pedido);
+            //ped.setValor(valor);
             pedRepo.save(ped);
         }
         Cliente cli = new Cliente();
