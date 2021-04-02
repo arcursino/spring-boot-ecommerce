@@ -1,6 +1,8 @@
 package br.gov.sp.fatec.springbootapp.service;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -40,5 +42,30 @@ public class ClienteServiceImpl implements ClienteService {
         cliRepo.save(cli);
         return cli;
     }
+
+    @Override
+    public List<Cliente> buscarTodosClientes(){
+        return cliRepo.findAll();
+    }
+
+    @Override
+    public Cliente buscarClientePorId(Long id){
+        Optional<Cliente> clienteOp = cliRepo.findById(id);
+        if (clienteOp.isPresent()) {
+            return clienteOp.get();
+        }
+        throw new RuntimeException("Cliente não encontrado");
+    }
+
+    @Override
+    public Cliente buscaClientePorNome(String nome){
+        Cliente cli = cliRepo.buscaClientePorNome(nome);
+        if(cli != null) {
+            return cli;
+        }
+        throw new RuntimeException("Cliente não Encontrado");
+
+    }
+    
     
 }
