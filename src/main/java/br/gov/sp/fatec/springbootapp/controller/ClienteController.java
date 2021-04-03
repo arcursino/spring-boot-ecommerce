@@ -21,9 +21,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import br.gov.sp.fatec.springbootapp.entity.Pedido;
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
 import br.gov.sp.fatec.springbootapp.service.ClienteService;
-import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
-
-
 
 
 @RestController
@@ -32,7 +29,7 @@ import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 public class ClienteController {
     @Autowired
     private ClienteService clienteService;
-
+   
     @GetMapping
     public List<Cliente> buscarTodos() {
         return clienteService.buscarTodosClientes();
@@ -43,11 +40,15 @@ public class ClienteController {
         return clienteService.buscarClientePorId(id);
     }
 
-    @GetMapping(value = "/{nome}")
-    public Cliente buscaClientePorNome(String nome){
-        return ClienteRepository.buscaClientePorNome(String nome);
+    @GetMapping(value = "/nome")
+    public Cliente buscaClientePorNome(@RequestParam(value="nome") String nome){
+        return clienteService.buscaClientePorNome(nome);
     }
 
+    @PostMapping
+    public Cliente cadastraNovoUsuario(@RequestBody Cliente cliente) {
+        return clienteService.criarCliente(cliente.getNome(), cliente.getEmail(), cliente.getIdade(), "Pedido100", 600);
+    }
 
 
 }
