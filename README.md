@@ -1,12 +1,7 @@
 # Tópicos Especiais - Prof Mineda
 
-- Caso escolha Gitpod
 
-Subir o repositório no github
-
-**No navegador:** 
-
-gitpod.io/#/https://github.com/arcursino/spring-boot-ecommerce
+[![Gitpod Ready-to-Code](https://img.shields.io/badge/Gitpod-Ready--to--Code-blue?logo=gitpod)](https://gitpod.io/#https://github.com/arcursino/spring-boot-ecommerce)
 
 já fara o pull e iniciar o workspace no gitpod
 
