@@ -10,8 +10,11 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "cli_cliente")
@@ -32,11 +35,8 @@ public class Cliente {
     private Integer idade;   
     
     
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "tab_cliente_pedido",
-        joinColumns = { @JoinColumn(name= "tab_cli_id")},
-        inverseJoinColumns = { @JoinColumn(name = "tab_ped_id")}
-        )
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="clientes")
+    @JsonIgnore    
     private Set<Pedido> pedidos;
     
     public Long getId() {

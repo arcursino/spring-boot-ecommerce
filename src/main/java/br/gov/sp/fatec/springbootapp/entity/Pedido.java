@@ -8,7 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -28,8 +30,11 @@ public class Pedido {
     @Column(name = "ped_valor")
     private Integer valor;
 
-    @ManyToMany(fetch = FetchType.LAZY, mappedBy = "pedidos")
-    @JsonIgnore
+    
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinTable(name = "tab_cliente_pedido",
+            joinColumns = { @JoinColumn(name = "ped_id")} ,
+            inverseJoinColumns = { @JoinColumn(name = "cli_id")})
     private Set<Cliente> clientes;
         
     public Long getId() {
