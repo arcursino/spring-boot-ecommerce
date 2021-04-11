@@ -18,5 +18,13 @@ public interface ClienteService {
 
     public Cliente novoCliente(String nome, String email, Integer idade);
 
+    //PEDIDO
+
     public Pedido buscarPedidoPorNome(String nome);
+
+    public Pedido criarPedido(String nome, Integer valor, Long id);
+
+    public Pedido buscarPedidoPorId(Long id);
+
+    public Pedido atualizarValorPedido(Integer valor, Long id);
 }
