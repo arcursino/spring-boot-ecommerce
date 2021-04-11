@@ -45,6 +45,12 @@ public class ClienteController {
         return clienteService.buscarClientes();
     }
 
+    @JsonView(View.ClienteResumo.class)
+    @GetMapping
+    public List<Cliente> buscarPedidos(){
+        return clienteService.buscarPedidos();
+    }
+
     @JsonView(View.ClienteCompleto.class)
     @GetMapping(value = "/id/{id}")
     public Cliente buscarClientePorId(@PathVariable("id") Long id){

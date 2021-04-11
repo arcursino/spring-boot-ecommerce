@@ -64,6 +64,12 @@ public class ClienteServiceImpl implements ClienteService {
         return cliRepo.findAll();
     }
 
+    public List<Pedido> buscarPedidos(){
+        return pedRepo.findAll();
+    }
+
+    
+
     @Override
     public Cliente buscarClientePorId(Long id){
         Cliente clienteOp = cliRepo.buscarClientePorId(id);
@@ -95,5 +101,17 @@ public class ClienteServiceImpl implements ClienteService {
 
         throw new RegistroNaoEncontradoException("Cliente não encontrado!");
     }
+
+    @Override
+    public Pedido buscarPedidoPorNome(String nome){
+        Pedido pedido = pedRepo.buscaPedidoPorNome(nome);
+        if(pedido != null) {
+            return pedido;
+        }
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");
+    }
+
+
+
     
 }

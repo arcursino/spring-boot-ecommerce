@@ -26,7 +26,7 @@ public class Pedido {
     private Long id;
 
     //cria a coluna nome do pedido
-    @JsonView(View.ClienteResumo.class) 
+    @JsonView({View.ClienteResumo.class, View.PedidoResumo.class}) 
     @Column(name = "ped_nome")
     private String nome;
 

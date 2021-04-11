@@ -9,6 +9,8 @@ public interface ClienteService {
 
     public List<Cliente> buscarClientes();
 
+    public List<Pedido> buscarPedidos();
+
     public Cliente buscarClientePorId(Long id);
 
     public Cliente buscarClientePorNome(String nome);
