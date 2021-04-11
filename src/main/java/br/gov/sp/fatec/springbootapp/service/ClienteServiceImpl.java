@@ -105,7 +105,5 @@ public class ClienteServiceImpl implements ClienteService {
         throw new RegistroNaoEncontradoException("Cliente não encontrado!");
     }
 
-    
-
-    
+        
 }
