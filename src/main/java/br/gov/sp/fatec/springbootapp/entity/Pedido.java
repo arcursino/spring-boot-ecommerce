@@ -19,22 +19,23 @@ import br.gov.sp.fatec.springbootapp.controller.View;
 @Table(name = "ped_pedido")
 public class Pedido {
     
-    //cria o id da tabela pedido chave unica
+    @JsonView(View.ClienteCompleto.class)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ped_id")
     private Long id;
 
-    //cria a coluna nome do pedido
+    
     @JsonView({View.ClienteResumo.class, View.PedidoResumo.class}) 
     @Column(name = "ped_nome")
     private String nome;
 
-    //cria a coluna valor do pedido
-    @JsonView(View.ClienteResumo.class) 
+    
+    @JsonView(View.PedidoResumo.class) 
     @Column(name = "ped_valor")
     private Integer valor;
 
+    @JsonView(View.PedidoResumo.class)
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cli_id")
     private Cliente cliente;

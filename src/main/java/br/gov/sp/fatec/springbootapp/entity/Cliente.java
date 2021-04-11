@@ -32,7 +32,7 @@ public class Cliente {
     @Column(name = "cli_id")
     private Long id;
 
-    @JsonView(View.ClienteResumo.class) 
+    @JsonView({View.ClienteResumo.class, View.PedidoResumo.class}) 
     @Column(name = "cli_nome")
     private String nome;
 
@@ -44,8 +44,7 @@ public class Cliente {
     @Column(name = "cli_idade")
     private Integer idade;
 
-    //Fetch => EAGER vai fazer o join e preencher // LAZY => Faz select quando precisar usar com o get 
-    // faz um join da tabela cliente com pedido
+    
     @JsonView(View.ClienteResumo.class) 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Pedido> pedidos;

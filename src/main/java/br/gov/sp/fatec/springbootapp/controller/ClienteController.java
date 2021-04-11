@@ -61,6 +61,8 @@ public class ClienteController {
         return clienteService.buscarClientePorNome(nome);
     }
 
+    //https://8080-coral-pig-mdjrd3v5.ws-us03.gitpod.io/ecommerce/cliente/pedido/pedido01
+    @JsonView(View.PedidoResumo.class)
     @GetMapping(value = "/pedido/{pedido}") 
     public Pedido buscarPedidoPorNome(@PathVariable("pedido") String nome) {
         return clienteService.buscarPedidoPorNome(nome);
@@ -75,6 +77,7 @@ public class ClienteController {
         "pedidos": null
     }
     */
+    @JsonView(View.ClienteResumo.class)
     @PostMapping
     public ResponseEntity<Cliente> cadastrarNovoCliente(@RequestBody Cliente cliente,
         UriComponentsBuilder uriComponentsBuilder){
@@ -86,6 +89,7 @@ public class ClienteController {
         return new ResponseEntity<Cliente>(cliente, responseHeaders, HttpStatus.CREATED);
     }
 
+    @JsonView(View.ClienteCompleto.class)
     @DeleteMapping("/id/{id}")
     public String deleteCliente(@PathVariable(value = "id") Long id) {
         Cliente cliente = clienteService.buscarClientePorId(id);
@@ -96,6 +100,7 @@ public class ClienteController {
         throw new RegistroNaoEncontradoException("Cliente não encontrado!");            
     }
 
+    @JsonView(View.ClienteResumo.class)
     @PutMapping("/id/{id}")
     public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente cliente,
             UriComponentsBuilder uriComponentsBuilder) throws Exception {
