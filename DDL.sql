@@ -6,7 +6,7 @@ create user 'user'@'localhost' identified by 'pass123';
 
 grant select, insert, delete, update on ecomerce.* to user@'localhost';
 
--- Cria tabela cliente
+
 create table cli_cliente (
   cli_id bigint unsigned not null auto_increment,
   cli_nome varchar(20) not null,
@@ -17,7 +17,7 @@ create table cli_cliente (
   UNIQUE KEY uni_cli_email (cli_email)  
 );
 
--- Cria tabela Pedido
+
 create table ped_pedido (
   ped_id bigint unsigned not null auto_increment,
   ped_nome varchar(50) not null,
