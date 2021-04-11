@@ -32,10 +32,8 @@ public class Pedido {
 
     
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinTable(name = "tab_cliente_pedido",
-            joinColumns = { @JoinColumn(name = "ped_id")} ,
-            inverseJoinColumns = { @JoinColumn(name = "cli_id")})
-    private Set<Cliente> clientes;
+    @JoinColumn(name = "cli_id")
+    private Cliente clientes;
         
     public Long getId() {
         return this.id;
