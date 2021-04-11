@@ -62,13 +62,14 @@ class SpringBootAppApplicationTests {
     }
 
    
-
+/*
     @Test
     void testaCliente() {
         Pedido ped = pedRepo.findById(1L).get();         
         assertEquals("Ariana", ped.getCliente().iterator().next().getNome());     
 
-    }    
+    } 
+*/  
 
     @Test
     void testaBuscaClienteNomeEmailQuery() {

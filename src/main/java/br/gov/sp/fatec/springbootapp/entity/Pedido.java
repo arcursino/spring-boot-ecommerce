@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.ecommerce.entity;
+package br.gov.sp.fatec.springbootapp.entity;
 
 import java.util.Set;
 
@@ -13,7 +13,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonView;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import br.gov.sp.fatec.ecommerce.controller.View;
+import br.gov.sp.fatec.springbootapp.controller.View;
 
 @Entity
 @Table(name = "ped_pedido")

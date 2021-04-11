@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.ecommerce.entity;
+package br.gov.sp.fatec.springbootapp.entity;
 
 import java.util.Set;
 
@@ -19,7 +19,7 @@ import java.util.Optional;
 
 import com.fasterxml.jackson.annotation.JsonView;
 
-import br.gov.sp.fatec.ecommerce.controller.View;
+import br.gov.sp.fatec.springbootapp.controller.View;
 
 @Entity
 @Table(name = "cli_cliente")
