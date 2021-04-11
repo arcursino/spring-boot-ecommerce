@@ -27,13 +27,6 @@ create table ped_pedido (
 );
 
 
-create table tab_cliente_pedido(
-  tab_cli_id bigint unsigned not null,
-  tab_ped_id bigint unsigned not null,
-  primary key (tab_cli_id, tab_ped_id),
-  foreign key tab_cliente_fk (tab_cli_id) references cli_cliente (cli_id) on delete restrict on update cascade,
-  foreign key tab_pedido_fk (tab_ped_id) references ped_pedido (ped_id) on delete restrict on update cascade	
-);
 
 insert into cli_cliente(cli_nome, cli_email, cli_idade)
     values('Ariana', 'ariana@ariana.com', 37);
@@ -41,9 +34,9 @@ insert into cli_cliente(cli_nome, cli_email, cli_idade)
     values('Ariana1', 'ariana1@ariana.com', 37);
 
 
-insert into ped_pedido(ped_nome, ped_valor,cli_id)
+insert into ped_pedido(ped_nome, ped_valor, cli_id)
     values('pedido01', 200, 1);
-insert into ped_pedido(ped_nome, ped_valor,cli_id)
+insert into ped_pedido(ped_nome, ped_valor, cli_id)
     values('pedido02', 400, 2);
 
 
