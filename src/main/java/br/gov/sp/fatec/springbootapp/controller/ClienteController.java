@@ -51,12 +51,23 @@ public class ClienteController {
         return clienteService.buscarClientePorId(id);
     }
 
+
+    //https://8080-coral-pig-mdjrd3v5.ws-us03.gitpod.io/ecommerce/cliente/nome?nome=Ariana
     @JsonView(View.ClienteResumo.class)
     @GetMapping(value = "/nome")
     public Cliente buscarClientePorNome(@RequestParam(value = "nome") String nome){
         return clienteService.buscarClientePorNome(nome);
     }
 
+    /*
+    {
+        "id": 5,
+        "nome": "Ariana2",
+        "email": "ara1@email.com",
+        "idade": 37,
+        "pedidos": null
+    }
+    */
     @PostMapping
     public ResponseEntity<Cliente> cadastrarNovoCliente(@RequestBody Cliente cliente,
         UriComponentsBuilder uriComponentsBuilder){
