@@ -1,4 +1,4 @@
-package br.gov.sp.fatec.springbootapp.entity;
+package br.gov.sp.fatec.ecommerce.entity;
 
 import java.util.Set;
 
@@ -10,59 +10,70 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
+import java.util.List;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import java.util.Optional;
 
+import com.fasterxml.jackson.annotation.JsonView;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import br.gov.sp.fatec.ecommerce.controller.View;
 
 @Entity
 @Table(name = "cli_cliente")
 public class Cliente {
 
+    //gera o id da tabela cliente
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(View.ClienteCompleto.class) 
     @Column(name = "cli_id")
     private Long id;
 
+    @JsonView(View.ClienteResumo.class) 
     @Column(name = "cli_nome")
     private String nome;
 
+    @JsonView(View.ClienteResumo.class) 
     @Column(name = "cli_email")
-    private String email;   
+    private String email;
 
+    @JsonView(View.ClienteResumo.class) 
     @Column(name = "cli_idade")
-    private Integer idade;   
-    
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="cliente")
-    @JsonIgnore    
+    private Integer idade;
+
+    //Fetch => EAGER vai fazer o join e preencher // LAZY => Faz select quando precisar usar com o get 
+    // faz um join da tabela cliente com pedido
+    @JsonView(View.ClienteResumo.class) 
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Pedido> pedidos;
-    
-    public Long getId() {
+
+    public Long getId(){
         return this.id;
     }
 
-    public void setId (Long id) {
+    public void setId(Long id){
         this.id = id;
     }
 
-    public String getNome() {
+    public String getNome(){
         return this.nome;
     }
 
-    public void setNome (String nome) {
+    public void setNome(String nome){
         this.nome = nome;
     }
 
-    public String getEmail() {
+    public String getEmail(){
         return this.email;
     }
 
-    public void setEmail (String email) {
+    public void setEmail(String email){
         this.email = email;
     }
-
+    
     public Integer getIdade() {
         return this.idade;
     }
@@ -78,5 +89,6 @@ public class Cliente {
     public void setPedidos (Set<Pedido> pedidos) {
         this.pedidos = pedidos;
     }
+    
     
 }
