@@ -1,15 +1,14 @@
 package br.gov.sp.fatec.springbootapp.service;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
+import br.gov.sp.fatec.springbootapp.entity.Pedido;
 import java.util.List;
 
 public interface ClienteService {
     
     public Cliente criarCliente(String nome, String email, Integer idade, String pedido, Integer valor);
 
-    public List<Cliente> buscarClientes();
-
-    public List<Pedido> buscarPedidos();
+    public List<Cliente> buscarClientes();    
 
     public Cliente buscarClientePorId(Long id);
 
@@ -18,4 +17,6 @@ public interface ClienteService {
     public Cliente atualizarCliente(String nome, String email, Integer idade, Long id);
 
     public Cliente novoCliente(String nome, String email, Integer idade);
+
+    public Pedido buscarPedidoPorNome(String nome);
 }

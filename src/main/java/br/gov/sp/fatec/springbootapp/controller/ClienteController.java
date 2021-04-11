@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
+import br.gov.sp.fatec.springbootapp.entity.Pedido;
 import br.gov.sp.fatec.springbootapp.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 import br.gov.sp.fatec.springbootapp.service.ClienteService;
@@ -45,12 +46,7 @@ public class ClienteController {
         return clienteService.buscarClientes();
     }
 
-    @JsonView(View.ClienteResumo.class)
-    @GetMapping
-    public List<Cliente> buscarPedidos(){
-        return clienteService.buscarPedidos();
-    }
-
+   
     @JsonView(View.ClienteCompleto.class)
     @GetMapping(value = "/id/{id}")
     public Cliente buscarClientePorId(@PathVariable("id") Long id){
@@ -63,6 +59,11 @@ public class ClienteController {
     @GetMapping(value = "/nome")
     public Cliente buscarClientePorNome(@RequestParam(value = "nome") String nome){
         return clienteService.buscarClientePorNome(nome);
+    }
+
+    @GetMapping(value = "/pedido/{pedido}") 
+    public Pedido buscarPedidoPorNome(@PathVariable("pedido") String nome) {
+        return clienteService.buscarPedidoPorNome(nome);
     }
 
     /*
