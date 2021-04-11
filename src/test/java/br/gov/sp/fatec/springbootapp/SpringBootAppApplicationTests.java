@@ -66,7 +66,7 @@ class SpringBootAppApplicationTests {
     @Test
     void testaCliente() {
         Pedido ped = pedRepo.findById(1L).get();         
-        assertEquals("Ariana", ped.getClientes().iterator().next().getNome());     
+        assertEquals("Ariana", ped.getCliente().iterator().next().getNome());     
 
     }    
 
@@ -86,8 +86,8 @@ class SpringBootAppApplicationTests {
 
     @Test
     void testaBuscaClienteNomePedidoQuery() {
-        List<Cliente> clientes = cliRepo.buscaClientePorNomePedido("pedido01");
-        assertFalse(clientes.isEmpty());    
+        List<Cliente> cliente = cliRepo.buscaClientePorNomePedido("pedido01");
+        assertFalse(cliente.isEmpty());    
 
     }
 

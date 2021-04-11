@@ -35,7 +35,7 @@ public class Cliente {
     private Integer idade;   
     
     
-    @OneToMany(fetch = FetchType.LAZY, mappedBy="clientes")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy="cliente")
     @JsonIgnore    
     private Set<Pedido> pedidos;
     

@@ -20,8 +20,10 @@ create table ped_pedido (
   ped_id bigint unsigned not null auto_increment,
   ped_nome varchar(50) not null,
   ped_valor int not null,
+  cli_id bigint unsigned not null,
   primary key (ped_id),  
   unique key uni_ped_nome (ped_nome)
+  foreign key pedcli_cli_fk (cli_id) references cli_cliente (cli_id) on delete restrict on update cascade
 );
 
 
@@ -39,14 +41,9 @@ insert into cli_cliente(cli_nome, cli_email, cli_idade)
     values('Ariana1', 'ariana1@ariana.com', 37);
 
 
+insert into ped_pedido(ped_nome, ped_valor,cli_id)
+    values('pedido01', 200, 1);
+insert into ped_pedido(ped_nome, ped_valor,cli_id)
+    values('pedido02', 400, 2);
 
-insert into ped_pedido(ped_nome, ped_valor)
-    values('pedido01', 200);
-insert into ped_pedido(ped_nome, ped_valor)
-    values('pedido02', 200);
-
-insert into tab_cliente_pedido(tab_cli_id, tab_ped_id)
-    values(1,1);
-insert into tab_cliente_pedido(tab_cli_id, tab_ped_id)
-    values(2,2);
 

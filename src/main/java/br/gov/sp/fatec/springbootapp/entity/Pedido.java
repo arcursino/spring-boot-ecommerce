@@ -33,7 +33,7 @@ public class Pedido {
     
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cli_id")
-    private Cliente clientes;
+    private Cliente cliente;
         
     public Long getId() {
         return this.id;
@@ -59,11 +59,11 @@ public class Pedido {
         this.valor = valor;
     }    
     
-    public Set<Cliente> getClientes() {
-        return this.clientes;
+    public Set<Cliente> getCliente() {
+        return this.cliente;
     }
 
-    public void setClientes (Set<Cliente> clientes) {
-        this.clientes = clientes;
+    public void setCliente (Set<Cliente> cliente) {
+        this.cliente = cliente;
     }  
 }
