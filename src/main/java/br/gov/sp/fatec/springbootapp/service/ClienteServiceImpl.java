@@ -19,15 +19,15 @@ import java.util.Optional;
 //como o component => onde vai ter a regra de negócio
 @Service("ClienteService")
 public class ClienteServiceImpl implements ClienteService {
-
-    // instancia o repositorio entao posso usar o rep direto
+    
     @Autowired
     private PedidoRepository pedRepo;
 
     @Autowired
     private ClienteRepository cliRepo;
 
-    //tudo o que ocorre é uma transação
+    
+    //CLIENTE
     @Transactional
     public Cliente criarCliente(String nome, String email, Integer idade, String pedido, Integer valor) {
         

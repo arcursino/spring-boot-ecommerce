@@ -16,8 +16,8 @@ public interface PedidoRepository extends JpaRepository<Pedido, Long>{
     public Pedido buscaPedidoPorValor(Integer valor);
 
     public Pedido findByNome(String nome);
-    
-    public Optional<Pedido> findById(Long id);
 
+    @Query("select p from  Pedido p where c.id = ?1 ")
+    public Pedido buscarPedidoPorId(Long id);
 
 }
