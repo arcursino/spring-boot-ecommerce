@@ -95,32 +95,7 @@ public class ClienteController {
         responseHeaders.setLocation(uriComponentsBuilder.path("/cliente/id/" + cliente.getId()).build().toUri());
 
         return new ResponseEntity<Cliente>(cliente, responseHeaders, HttpStatus.CREATED);
-    }   
-
-    //PEDIDOS
-
-
-    //https://8080-coral-pig-mdjrd3v5.ws-us03.gitpod.io/ecommerce/cliente/pedido/pedido01
-    @JsonView(View.PedidoResumo.class)
-    @GetMapping(value = "/pedido/{pedido}") 
-    public Pedido buscarPedidoPorNome(@PathVariable("pedido") String nome) {
-        return clienteService.buscarPedidoPorNome(nome);
-    }
-
-    @JsonView(View.PedidoResumo.class)
-    @PostMapping("/")
-    public ResponseEntity<Pedido> cadastrarNovoPedido(@RequestBody Pedido pedido,
-        UriComponentsBuilder uriComponentsBuilder) throws Exception {
-
-        pedido = clienteService.criarPedido(pedido.getNome(), pedido.getValor(), pedido.getId());
-        HttpHeaders responseHeaders = new HttpHeaders();
-        responseHeaders.setLocation(uriComponentsBuilder.path("/pedido/id/" + pedido.getId()).build().toUri());
-
-       return new ResponseEntity<Pedido>(pedido, HttpStatus.CREATED);
-    }
-
-
-
+    }     
 
 
 

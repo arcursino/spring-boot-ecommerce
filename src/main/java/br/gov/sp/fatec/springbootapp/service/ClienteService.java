@@ -20,9 +20,11 @@ public interface ClienteService {
 
     //PEDIDO
 
-    public Pedido buscarPedidoPorNome(String nome);
-
     public Pedido criarPedido(String nome, Integer valor, Long id);
+
+    public Pedido buscaPedidoPorNome(String nome);
+    
+    public List<Pedido> buscarPedidos();
 
     public Pedido buscarPedidoPorId(Long id);
 

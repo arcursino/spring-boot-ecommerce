@@ -100,15 +100,6 @@ public class ClienteServiceImpl implements ClienteService {
     //PEDIDO
 
 
-    @Override
-    public Pedido buscaPedidoPorNome(String nome){
-        Pedido pedido = pedRepo.findByNome(nome);
-        if(pedido != null){
-            return pedido;
-        }
-        throw new RegistroNaoEncontradoException("Pedido não encontrado");
-    }
-
     @Transactional
     public Pedido criarPedido(String nome, Integer valor, Long id){
         Cliente cliente = cliRepo.buscarClientePorId(id);
@@ -128,6 +119,44 @@ public class ClienteServiceImpl implements ClienteService {
         throw new RegistroNaoEncontradoException("Cliente não encontrado!");     
         
     }
+
+    @Override
+    public List<Pedido> buscarPedidos(){
+        return pedRepo.findAll();
+    }
+
+    @Override
+    public Pedido buscaPedidoPorNome(String nome){
+        Pedido pedido = pedRepo.findByNome(nome);
+        if(pedido != null){
+            return pedido;
+        }
+        throw new RegistroNaoEncontradoException("Pedido não encontrado");
+    }
+
+    
+    public Pedido buscarPedidoPorId(Long id){
+        Pedido pedido = pedRepo.buscarPedidoPorId(id);
+        if(pedido != null) {
+            return pedido;           
+        }
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");
+
+    }   
+
+    public Pedido atualizarValorPedido(Integer valor, Long id){
+
+        Pedido pedido = pedRepo.buscarPedidoPorId(id);
+
+        if (pedido != null) {
+            pedido.setValor(valor);
+            pedRepo.save(pedido);
+            return pedido;            
+        }
+
+        throw new RegistroNaoEncontradoException("Pedido não encontrado!");
+
+    } 
 
         
 }
