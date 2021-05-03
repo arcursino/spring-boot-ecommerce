@@ -36,6 +36,9 @@ public class Cliente {
     @Column(name = "cli_nome")
     private String nome;
 
+    @Column(name = "cli_senha")
+    private String senha;
+
     @JsonView(View.ClienteResumo.class) 
     @Column(name = "cli_email")
     private String email;
@@ -48,6 +51,14 @@ public class Cliente {
     @JsonView(View.ClienteResumo.class) 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Pedido> pedidos;
+
+    @JsonView(View.UsuarioResumo.class)
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "uau_cliente_autorizacao",
+        joinColumns = { @JoinColumn(name = "cli_id")},
+        inverseJoinColumns = { @JoinColumn(name = "cli_id") }
+        )
+    private Set<Autorizacao> autorizacoes;
 
     public Long getId(){
         return this.id;
@@ -63,6 +74,14 @@ public class Cliente {
 
     public void setNome(String nome){
         this.nome = nome;
+    }
+
+    public String getSenha() {
+        return this.senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
     }
 
     public String getEmail(){
@@ -89,5 +108,12 @@ public class Cliente {
         this.pedidos = pedidos;
     }
     
+    public Set<Autorizacao> getAutorizacoes() {
+        return this.autorizacoes;
+    }
+
+    public void setAutorizacoes(Set<Autorizacao> autorizacoes) {
+        this.autorizacoes = autorizacoes;
+    }
     
 }

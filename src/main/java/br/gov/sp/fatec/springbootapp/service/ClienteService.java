@@ -2,6 +2,8 @@ package br.gov.sp.fatec.springbootapp.service;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
 import br.gov.sp.fatec.springbootapp.entity.Pedido;
+import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
+
 import java.util.List;
 
 public interface ClienteService {
@@ -29,4 +31,8 @@ public interface ClienteService {
     public Pedido buscarPedidoPorId(Long id);
 
     public Pedido atualizarValorPedido(Integer valor, Long id);
+
+    //AUTORIZAÇÃO
+    public Autorizacao buscarAutorizacaoPorNome(String nome);
+
 }

@@ -22,6 +22,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
         http.csrf().disable().httpBasic().and()
             // this disables session creation on Spring Security
             .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-  }
+    }
+
+    @Bean
+    public PasswordEncoder passwordEncoderBean() {
+        return new BCryptPasswordEncoder();
+    }
   
 }

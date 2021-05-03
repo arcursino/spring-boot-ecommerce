@@ -5,13 +5,18 @@ import br.gov.sp.fatec.springbootapp.controller.View;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.gov.sp.fatec.springbootapp.exception.RegistroNaoEncontradoException;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
 import br.gov.sp.fatec.springbootapp.entity.Pedido;
+import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 import br.gov.sp.fatec.springbootapp.repository.PedidoRepository;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
+import br.gov.sp.fatec.springbootapp.repository.AutorizacaoRepository;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,10 +31,16 @@ public class ClienteServiceImpl implements ClienteService {
     @Autowired
     private ClienteRepository cliRepo;
 
+    @Autowired
+    private AutorizacaoRepository autRepo;
+
+    @Autowired
+    private PasswordEncoder passEncoder;
+
     
     //CLIENTE
     @Transactional
-    public Cliente criarCliente(String nome, String email, Integer idade, String pedido, Integer valor) {
+    public Cliente criarCliente(String nome, String senha, String email, Integer idade, String pedido, Integer valor) {
         
         Pedido ped = pedRepo.buscaPedidoPorNome(pedido);
         if(ped == null) {
@@ -41,29 +52,36 @@ public class ClienteServiceImpl implements ClienteService {
 
         Cliente cli = new Cliente();
         cli.setNome(nome);
+        cli.setSenha(passEncoder.encode(senha));
         cli.setEmail(email);
         cli.setIdade(idade);
         cli.setPedidos(new HashSet<Pedido>()); //pegando a lista de pedidos do cliente e atribuindo o pedido
         cli.getPedidos().add(ped);
+        cli.setAutorizacoes(new HashSet<Autorizacao>());
+        cli.getAutorizacoes().add(aut);
         cliRepo.save(cli);
         return cli;
     }
 
     @Transactional
-    public Cliente novoCliente(String nome, String email, Integer idade) {
+    public Cliente novoCliente(String nome, String senha, String email, Integer idade) {
         
         Cliente cli = new Cliente();
         cli.setNome(nome);
+        cli.setSenha(passEncoder.encode(senha));
         cli.setEmail(email);
         cli.setIdade(idade);
         cliRepo.save(cli);
         return cli;
     }
 
+    @Override
+    @PreAuthorize("hasRole('ADMIN')")
     public List<Cliente> buscarClientes(){
         return cliRepo.findAll();
     }
     
+
     @Override
     public Cliente buscarClientePorId(Long id){
         Cliente clienteOp = cliRepo.buscarClientePorId(id);
@@ -83,10 +101,11 @@ public class ClienteServiceImpl implements ClienteService {
     }
         
 
-    public Cliente atualizarCliente(String nome, String email, Integer idade, Long id){
+    public Cliente atualizarCliente(String nome, String senha, String email, Integer idade, Long id){
         Cliente cliente = cliRepo.buscarClientePorId(id);
         if(cliente != null){
             cliente.setNome(nome);
+            cliente.setSenha(passEncoder.encode(senha));
             cliente.setEmail(email);
             cliente.setIdade(idade);
             cliRepo.save(cliente);
@@ -157,6 +176,16 @@ public class ClienteServiceImpl implements ClienteService {
         throw new RegistroNaoEncontradoException("Pedido não encontrado!");
 
     } 
+
+    @Override
+    @PreAuthorize("isAuthenticated()")
+    public Autorizacao buscarAutorizacaoPorNome(String nome) {
+        Autorizacao autorizacao = autRepo.findByNome(nome);
+        if (autorizacao != null) {
+            return autorizacao;
+        }
+        throw new RegistroNaoEncontradoException("Autorização não encontrada!");
+    }
 
         
 }
