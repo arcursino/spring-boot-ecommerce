@@ -6,6 +6,8 @@ import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 
 import java.util.List;
 
+import org.springframework.security.core.userdetails.UserDetailsService;
+
 public interface ClienteService extends UserDetailsService {
     
     public Cliente criarCliente(String nome, String senha, String email, Integer idade, Integer valor, String autorizacao);
