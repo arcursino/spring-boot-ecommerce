@@ -52,7 +52,7 @@ public class Cliente {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "cliente")
     private Set<Pedido> pedidos;
 
-    @JsonView(View.UsuarioResumo.class)
+    @JsonView(View.ClienteResumo.class)
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "uau_cliente_autorizacao",
         joinColumns = { @JoinColumn(name = "cli_id")},

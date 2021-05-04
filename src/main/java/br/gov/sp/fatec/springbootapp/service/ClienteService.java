@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ClienteService {
     
-    public Cliente criarCliente(String nome, String email, Integer idade, String pedido, Integer valor);
+    public Cliente criarCliente(String nome, String senha, String email, Integer idade, Integer valor, String autorizacao);
 
     public List<Cliente> buscarClientes();    
 

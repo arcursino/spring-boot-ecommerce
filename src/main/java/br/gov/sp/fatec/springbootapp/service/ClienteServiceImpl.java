@@ -40,23 +40,20 @@ public class ClienteServiceImpl implements ClienteService {
     
     //CLIENTE
     @Transactional
-    public Cliente criarCliente(String nome, String senha, String email, Integer idade, String pedido, Integer valor) {
+    public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao, Integer valor) {
         
-        Pedido ped = pedRepo.buscaPedidoPorNome(pedido);
-        if(ped == null) {
-            ped = new Pedido();
-            ped.setNome(pedido);
-            ped.setValor(valor);
-            pedRepo.save(ped);
+        Autorizacao aut = autRepo.buscarAutorizacaoPorNome(autorizacao);
+        if (aut == null) {
+            aut = new Autorizacao();
+            aut.setNome(autorizacao);
+            autRepo.save(aut);
         }
 
         Cliente cli = new Cliente();
         cli.setNome(nome);
         cli.setSenha(passEncoder.encode(senha));
         cli.setEmail(email);
-        cli.setIdade(idade);
-        cli.setPedidos(new HashSet<Pedido>()); //pegando a lista de pedidos do cliente e atribuindo o pedido
-        cli.getPedidos().add(ped);
+        cli.setIdade(idade);        
         cli.setAutorizacoes(new HashSet<Autorizacao>());
         cli.getAutorizacoes().add(aut);
         cliRepo.save(cli);
