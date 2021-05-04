@@ -42,7 +42,7 @@ public class ClienteServiceImpl implements ClienteService {
     @Transactional
     public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao, Integer valor) {
         
-        Autorizacao aut = autRepo.buscarAutorizacaoPorNome(autorizacao);
+        Autorizacao aut = autRepo.findByNome(autorizacao);
         if (aut == null) {
             aut = new Autorizacao();
             aut.setNome(autorizacao);

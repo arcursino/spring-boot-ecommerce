@@ -6,7 +6,7 @@ import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 
 import java.util.List;
 
-public interface ClienteService {
+public interface ClienteService extends UserDetailsService {
     
     public Cliente criarCliente(String nome, String senha, String email, Integer idade, Integer valor, String autorizacao);
 
@@ -34,5 +34,7 @@ public interface ClienteService {
 
     //AUTORIZAÇÃO
     public Autorizacao buscarAutorizacaoPorNome(String nome);
+
+    public Autorizacao findByNome(String nome);
 
 }
