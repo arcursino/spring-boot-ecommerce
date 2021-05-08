@@ -91,11 +91,11 @@ class SpringBootAppApplicationTests {
         assertFalse(cliente.isEmpty());    
 
     }
-
+/*
     @Test
     void testaServicoCriaCliente(){
         Cliente cli = cliService.criarCliente("Ariana4", "ariana4@ariana.com", 37, "pedido04", 400);
         assertNotNull(cli);
-    }    
+    }  */  
 
 }

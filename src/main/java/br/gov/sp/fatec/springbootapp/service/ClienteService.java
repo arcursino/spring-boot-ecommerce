@@ -6,11 +6,10 @@ import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 
 import java.util.List;
 
-import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface ClienteService extends UserDetailsService {
+public interface ClienteService {
     
-    public Cliente criarCliente(String nome, String senha, String email, Integer idade, Integer valor, String autorizacao);
+    public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao);
 
     public List<Cliente> buscarClientes();    
 
@@ -18,9 +17,9 @@ public interface ClienteService extends UserDetailsService {
 
     public Cliente buscarClientePorNome(String nome);
 
-    public Cliente atualizarCliente(String nome, String email, Integer idade, Long id);
+    public Cliente atualizarCliente(String nome, String senha, String email, Integer idade, Long id);
 
-    public Cliente novoCliente(String nome, String email, Integer idade);
+    public Cliente novoCliente(String nome, String senha, String email, Integer idade);
 
     //PEDIDO
 
@@ -37,6 +36,6 @@ public interface ClienteService extends UserDetailsService {
     //AUTORIZAÇÃO
     public Autorizacao buscarAutorizacaoPorNome(String nome);
 
-    public Autorizacao findByNome(String nome);
+    //public Autorizacao findByNome(String nome);
 
 }

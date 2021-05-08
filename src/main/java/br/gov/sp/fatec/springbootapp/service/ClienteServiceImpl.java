@@ -40,14 +40,14 @@ public class ClienteServiceImpl implements ClienteService {
     
     //CLIENTE
     @Transactional
-    public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao, Integer valor) {
+    public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao) {
         
         Autorizacao aut = autRepo.findByNome(autorizacao);
         if (aut == null) {
             aut = new Autorizacao();
             aut.setNome(autorizacao);
             autRepo.save(aut);
-        }
+        }        
 
         Cliente cli = new Cliente();
         cli.setNome(nome);
@@ -175,9 +175,11 @@ public class ClienteServiceImpl implements ClienteService {
     } 
 
     @Override
-    @PreAuthorize("isAuthenticated()")
+    //@PreAuthorize("isAuthenticated()")
     public Autorizacao buscarAutorizacaoPorNome(String nome) {
+
         Autorizacao autorizacao = autRepo.findByNome(nome);
+
         if (autorizacao != null) {
             return autorizacao;
         }

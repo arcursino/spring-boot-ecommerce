@@ -56,7 +56,7 @@ public class Cliente {
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "uau_cliente_autorizacao",
         joinColumns = { @JoinColumn(name = "cli_id")},
-        inverseJoinColumns = { @JoinColumn(name = "cli_id") }
+        inverseJoinColumns = { @JoinColumn(name = "aut_id") }
         )
     private Set<Autorizacao> autorizacoes;
 
