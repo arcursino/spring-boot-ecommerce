@@ -59,8 +59,7 @@ public class ClienteController {
     @GetMapping(value = "/nome")
     public Cliente buscarClientePorNome(@RequestParam(value = "nome") String nome){
         return clienteService.buscarClientePorNome(nome);
-    }
-    
+    }   
 
     
     @JsonView(View.ClienteResumo.class)

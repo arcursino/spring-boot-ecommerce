@@ -5,8 +5,10 @@ import br.gov.sp.fatec.springbootapp.controller.View;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import br.gov.sp.fatec.springbootapp.exception.RegistroNaoEncontradoException;
@@ -80,6 +82,7 @@ public class ClienteServiceImpl implements ClienteService {
     
 
     @Override
+    @PreAuthorize("hasAnyRole('ADMIN', 'USUARIO')")
     public Cliente buscarClientePorId(Long id){
         Cliente clienteOp = cliRepo.buscarClientePorId(id);
         if(clienteOp != null) {
@@ -89,6 +92,7 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Cliente buscarClientePorNome(String nome){
         Cliente cliente = cliRepo.findByNome(nome);
         if(cliente != null) {
@@ -137,11 +141,13 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public List<Pedido> buscarPedidos(){
         return pedRepo.findAll();
     }
 
     @Override
+    @PreAuthorize("isAuthenticated()")
     public Pedido buscaPedidoPorNome(String nome){
         Pedido pedido = pedRepo.findByNome(nome);
         if(pedido != null){
@@ -150,7 +156,7 @@ public class ClienteServiceImpl implements ClienteService {
         throw new RegistroNaoEncontradoException("Pedido não encontrado");
     }
 
-    
+    @PreAuthorize("isAuthenticated()")
     public Pedido buscarPedidoPorId(Long id){
         Pedido pedido = pedRepo.buscarPedidoPorId(id);
         if(pedido != null) {
@@ -175,7 +181,7 @@ public class ClienteServiceImpl implements ClienteService {
     } 
 
     @Override
-    //@PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAuthenticated()")
     public Autorizacao buscarAutorizacaoPorNome(String nome) {
 
         Autorizacao autorizacao = autRepo.findByNome(nome);
@@ -185,6 +191,19 @@ public class ClienteServiceImpl implements ClienteService {
         }
         throw new RegistroNaoEncontradoException("Autorização não encontrada!");
     }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    Cliente cliente = cliRepo.buscarClientePorNome(username);
+    if (cliente == null) {
+      throw new UsernameNotFoundException("Cliente " + username + " não encontrado!");
+    }
+    return User.builder().username(username).password(cliente.getSenha())
+        .authorities(cliente.getAutorizacoes().stream()
+            .map(Autorizacao::getNome).collect(Collectors.toList())
+            .toArray(new String[cliente.getAutorizacoes().size()]))
+        .build();
+  }
 
         
 }

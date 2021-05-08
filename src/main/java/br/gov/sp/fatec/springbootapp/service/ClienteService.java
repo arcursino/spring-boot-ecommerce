@@ -5,9 +5,10 @@ import br.gov.sp.fatec.springbootapp.entity.Pedido;
 import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 
 import java.util.List;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-public interface ClienteService {
+public interface ClienteService extends UserDetailService {
     
     public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao);
 
