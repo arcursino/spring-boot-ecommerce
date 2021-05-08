@@ -8,7 +8,7 @@ import java.util.List;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 
-public interface ClienteService extends UserDetailService {
+public interface ClienteService extends UserDetailsService {
     
     public Cliente criarCliente(String nome, String senha, String email, Integer idade, String autorizacao);
 

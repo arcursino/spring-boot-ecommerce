@@ -1,6 +1,10 @@
 package br.gov.sp.fatec.springbootapp.service;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+
 import br.gov.sp.fatec.springbootapp.controller.View;
 import javax.transaction.Transactional;
 
@@ -19,8 +23,6 @@ import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 import br.gov.sp.fatec.springbootapp.repository.PedidoRepository;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 import br.gov.sp.fatec.springbootapp.repository.AutorizacaoRepository;
-import java.util.List;
-import java.util.Optional;
 
 
 //como o component => onde vai ter a regra de negócio
@@ -194,7 +196,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-    Cliente cliente = cliRepo.buscarClientePorNome(username);
+    Cliente cliente = cliRepo.findByNome(username);
     if (cliente == null) {
       throw new UsernameNotFoundException("Cliente " + username + " não encontrado!");
     }
