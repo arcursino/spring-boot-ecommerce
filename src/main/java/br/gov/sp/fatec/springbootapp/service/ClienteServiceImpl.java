@@ -2,10 +2,7 @@ package br.gov.sp.fatec.springbootapp.service;
 
 import java.util.HashSet;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
-
-import br.gov.sp.fatec.springbootapp.controller.View;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;

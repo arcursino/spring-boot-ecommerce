@@ -18,11 +18,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-//import org.springframework.web.util.UriComponents;
+
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
-import br.gov.sp.fatec.springbootapp.entity.Pedido;
 import br.gov.sp.fatec.springbootapp.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 import br.gov.sp.fatec.springbootapp.service.ClienteService;
