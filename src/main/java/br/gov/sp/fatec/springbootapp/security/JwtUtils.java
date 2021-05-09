@@ -49,8 +49,10 @@ public class JwtUtils {
                 .username(usuario.getUsername())
                 .password("secret")
                 .authorities(usuario.getAutorizacao()).build();
-        return new UsernamePasswordAuthenticationToken(usuario.getUsername(), usuario.getPassword(),
-                userDetails.getAuthorities());
+        return new UsernamePasswordAuthenticationToken(
+            usuario.getUsername(),
+            usuario.getPassword(),
+            userDetails.getAuthorities());
     }
 
 }

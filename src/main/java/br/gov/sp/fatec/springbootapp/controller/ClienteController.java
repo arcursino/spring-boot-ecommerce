@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import br.gov.sp.fatec.springbootapp.entity.Cliente;
+import br.gov.sp.fatec.springbootapp.entity.Autorizacao;
 import br.gov.sp.fatec.springbootapp.exception.RegistroNaoEncontradoException;
 import br.gov.sp.fatec.springbootapp.repository.ClienteRepository;
 import br.gov.sp.fatec.springbootapp.service.ClienteService;
@@ -94,7 +95,13 @@ public class ClienteController {
         responseHeaders.setLocation(uriComponentsBuilder.path("/cliente/id/" + cliente.getId()).build().toUri());
 
         return new ResponseEntity<Cliente>(cliente, responseHeaders, HttpStatus.CREATED);
-    }     
+    }  
+    
+    @JsonView(View.AutorizacaoResumo.class)
+    @GetMapping(value = "/autorizacao/{autorizacao}")
+    public Autorizacao buscarAutorizacaoPorNome(@PathVariable("autorizacao") String nome) {
+        return clienteService.buscarAutorizacaoPorNome(nome);
+    }
 
 
 
