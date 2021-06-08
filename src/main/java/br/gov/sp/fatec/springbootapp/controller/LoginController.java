@@ -31,7 +31,7 @@ public class LoginController {
   @PostMapping()
   public Login autenticar(@RequestBody Login login) throws JsonProcessingException {
     Authentication auth = new UsernamePasswordAuthenticationToken(login.getUsername(), login.getPassword());    
-    String aut = clienteService.buscarAutorizacaoPorNome(login.getUsername()).getNome();    
+    String aut = clienteService.buscarAutorizacaoUsuario(login.getUsername());   
     auth = authManager.authenticate(auth);
 
     login.setPassword(null);

@@ -192,6 +192,12 @@ public class ClienteServiceImpl implements ClienteService {
     }
 
     @Override
+    public String buscarAutorizacaoUsuario(String autorizacao) {
+        Cliente cliente = cliRepo.findByNome(autorizacao);
+        return cliente.getAutorizacoes().iterator().next().getNome();
+    }
+
+    @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
     Cliente cliente = cliRepo.findByNome(username);
     if (cliente == null) {
